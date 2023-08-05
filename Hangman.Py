@@ -1,14 +1,52 @@
 #Hangman Project:
+import csv
+import random
+
+
+
+
+
+
+
+
 print("Welcome to hangman!: 10 strikes and you are out")
 
 
 while True:
-    word = input("To start playing hangman choose a word: ")
-    if all(x.isalpha() or x.isspace() for x in word ):
-        break
+    mode = input("Select mode: 1.randomly generated word,  2.input your own word. Type either 1 or 2 to select a mode to begin: ")
+    if mode == "1" or "2":
+        break 
     else:
-        print("Invalid word. Contains invalid charectors which are not alphabetical or space")
+        print("Please only type the character 1 or 2. ")
+
+
+
+
+
+
+if mode== "2":
+    while True:
+        word = input("To start playing hangman choose a word: ")
+        if all(x.isalpha() or x.isspace() for x in word ):
+            break
+        else:
+            print("Invalid word. Contains invalid charectors which are not alphabetical or space")
+
+else:
+    with open("./wordlist.csv") as wordlist:
+        csv_reader = csv.reader(wordlist)
+        csvlist = list(csv_reader)
+        word = str(random.choice(csvlist))
+        word = word.strip()
+    
 #loop above only allows valid words go through. ie no punctuation etc
+
+
+
+
+
+
+
 
 word=word.lower()
 
@@ -26,7 +64,7 @@ while i<=10:
 
     print(" %s . You have %i strikes. All guessed letters: %s."%(blanks,i,used)) #where i is N.O strikes
     if i==10:
-        print("GAME OVER!")
+        print("GAME OVER! The word was %s" %(word))
         break
     if all( x.isalpha() or x.isspace() for x in blanks ):
         print("You Win!")

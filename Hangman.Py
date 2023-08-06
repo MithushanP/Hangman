@@ -2,27 +2,14 @@
 import csv
 import random
 
-
-
-
-
-
-
-
 print("Welcome to hangman!: 10 strikes and you are out")
-
 
 while True:
     mode = input("Select mode: 1.randomly generated word,  2.input your own word. Type either 1 or 2 to select a mode to begin: ")
-    if mode == "1" or "2":
+    if mode == "1" or mode == "2":
         break 
     else:
         print("Please only type the character 1 or 2. ")
-
-
-
-
-
 
 if mode== "2":
     while True:
@@ -40,13 +27,6 @@ else:
         word = word.strip()
     
 #loop above only allows valid words go through. ie no punctuation etc
-
-
-
-
-
-
-
 
 word=word.lower()
 
@@ -101,10 +81,6 @@ while i<=10:
             used+=" "+guess +","
 
             i+=1
-
-
-        
-
 
 
     elif len(guess)>=2:

@@ -2,6 +2,18 @@
 import csv
 import random
 
+#function
+
+def blankconvert(text): #a function to convert the word into blanks
+    text=text.lower()
+    blanks=""
+    for a in range(len(text)):
+            if text[a].isalpha():
+                blanks+="_"
+            else:
+                blanks+=" "
+    return blanks
+
 print("Welcome to hangman!: 10 strikes and you are out")
 
 while True:
@@ -28,21 +40,15 @@ else:
     
 #loop above only allows valid words go through. ie no punctuation etc
 
-word=word.lower()
+blanks = blankconvert(word) #note add function to convcer to to blanks
+
+used=[]
 
 i=0
-blanks=""
-for a in range(len(word)):
-    if word[a].isalpha():
-        blanks+="_"
-    else:
-        blanks+=" "
-
-used=""
-
 while i<=10:
 
-    print(" %s . You have %i strikes. All guessed letters: %s."%(blanks,i,used)) #where i is N.O strikes
+    print(" %s . You have %i strikes. All guessed letters: "%(blanks,i)) #where i is N.O strikes
+    print(used)
     if i==10:
         print("GAME OVER! The word was %s" %(word))
         break
@@ -54,7 +60,9 @@ while i<=10:
     while True:
         guess=input("Please either guess a letter or the entire word:  ")
         if len(guess)==1:
-            if guess.isalpha():
+            if guess in used:
+                print("Already used that letter.")
+            elif guess.isalpha():
                 break
             else:
                 print("Invalid Charector used.")
@@ -78,8 +86,7 @@ while i<=10:
 
         else:
             print("Sorry the letter is not in the word/s")
-            used+=" "+guess +","
-
+            used.append(guess)
             i+=1
 
 
